@@ -1,0 +1,314 @@
+#1 Text Summarizer
+
+import google.generativeai as genai
+
+genai.configure(api_key="AIzaSyDAIjcMBx5IKnHlOcZKL50YQolluqzdvwk")
+
+model = genai.GenerativeModel("gemini-2.5-flash")
+
+text = input("Enter paragraph:\n")
+
+prompt = f"""
+Summarize the following paragraph in 2-3 lines:
+{text}
+"""
+
+try:
+    response = model.generate_content(prompt)
+    print("\n--- Summary ---\n")
+    print(response.text)
+except Exception as e:
+    print("Error:", e)
+    
+
+#2 Simple Chatbot
+
+import google.generativeai as genai
+
+genai.configure(api_key="AIzaSyDAIjcMBx5IKnHlOcZKL50YQolluqzdvwk")
+
+model = genai.GenerativeModel("gemini-2.5-flash")
+
+print("Type 'exit' to stop\n")
+
+while True:
+    user = input("You: ")
+
+    if user.lower() == "exit":
+        print("Chat ended.")
+        break
+
+    try:
+        response = model.generate_content(user)
+        print("Bot:", response.text)
+
+    except Exception as e:
+        print("Error:", e)    
+        
+
+#3 Sentiment analysis
+
+import google.generativeai as genai
+
+genai.configure(api_key="AIzaSyDAIjcMBx5IKnHlOcZKL50YQolluqzdvwk")
+
+model = genai.GenerativeModel("gemini-2.5-flash")
+
+text = input("Enter text: ")
+
+prompt = f"""
+Classify the sentiment of the following text as:
+Positive, Negative, or Neutral.
+Text: {text}
+Only give one word answer.
+"""
+
+try:
+    response = model.generate_content(prompt)
+    print("\nSentiment:", response.text.strip())
+except Exception as e:
+    print("Error:", e)
+
+
+#4 Language translation
+
+import google.generativeai as genai
+
+genai.configure(api_key="AIzaSyDAIjcMBx5IKnHlOcZKL50YQolluqzdvwk")
+
+model = genai.GenerativeModel("gemini-2.5-flash")
+
+text = input("Enter English text: ")
+
+prompt = f"""
+Translate the following English text into Hindi:
+{text}
+"""
+
+try:
+    response = model.generate_content(prompt)
+    print("\nHindi Translation:\n", response.text)
+
+except Exception as e:
+    print("Error:", e)
+
+
+#5 Grammar translation
+
+import google.generativeai as genai
+
+genai.configure(api_key="AIzaSyDAIjcMBx5IKnHlOcZKL50YQolluqzdvwk")
+
+model = genai.GenerativeModel("gemini-2.5-flash")
+
+text = input("Enter sentence: ")
+
+prompt = f"""
+Correct the grammar of the following sentence: {text}
+Only return the corrected sentence.
+"""
+
+try:
+    response = model.generate_content(prompt)
+    print("\nCorrected Sentence:\n", response.text)
+
+except Exception as e:
+    print("Error:", e)
+
+
+#6 Email generation
+
+# import google.generativeai as genai
+
+# genai.configure(api_key="AIzaSyDAIjcMBx5IKnHlOcZKL50YQolluqzdvwk")
+
+# model = genai.GenerativeModel("gemini-2.5-flash")
+
+# purpose = input("Enter purpose of email (e.g., job application, leave request): ")
+# tone = input("Enter tone (formal / informal): ")
+# details = input("Enter key details: ")
+
+# prompt = f"""
+# Write a {tone} email for the following purpose:
+
+# Purpose: {purpose}
+# Details: {details}
+
+# Include:
+# - Subject line
+# - Proper greeting
+# - Clear body
+# - Closing
+# """
+
+# try:
+#     response = model.generate_content(prompt)
+
+#     print("\n--- Generated Email ---\n")
+#     print(response.text)
+
+# except Exception as e:
+#     print("Error:", e)
+
+# OR
+import google.generativeai as genai
+
+genai.configure(api_key="AIzaSyDAIjcMBx5IKnHlOcZKL50YQolluqzdvwk")
+model = genai.GenerativeModel("gemini-2.5-flash")
+
+purpose = input("Purpose: ")
+tone = input("Tone: ")
+details = input("Details: ")
+
+prompt = f"Write a short {tone} email for {purpose}. Details: {details}. Include subject."
+
+try:
+    res = model.generate_content(prompt)
+    print("\nEmail:\n", res.text.strip())
+except Exception as e:
+    print("Error:", e)    
+    
+
+#7 Keyword extractor
+
+import google.generativeai as genai
+
+genai.configure(api_key="AIzaSyDAIjcMBx5IKnHlOcZKL50YQolluqzdvwk")
+
+model = genai.GenerativeModel("gemini-2.5-flash")
+
+text = input("Enter sentence: ")
+
+prompt = f"""
+Extract important keywords from the following text.
+Return only keywords separated by commas.
+
+Text: {text}
+"""
+
+try:
+    response = model.generate_content(prompt)
+    print("\nKeywords:\n", response.text.strip())
+
+except Exception as e:
+    print("Error:", e)
+    
+
+#8 Word counter 
+
+text = input("Enter text: ")
+word_count =len(text.split())
+char_count = len(text)
+print("\nWord Count:", word_count)
+print("Character Count:", char_count)
+
+
+#9 Paraphrasing tool
+
+import google.generativeai as genai
+genai.configure(api_key="AIzaSyDAIjcMBx5IKnHlOcZKL50YQolluqzdvwk")
+model = genai.GenerativeModel("gemini-2.5-flash")
+text = input("Enter sentence: ")
+prompt = f"Paraphrase this sentence:\n{text}"
+response = model.generate_content(prompt)
+print("\nParaphrased Sentence:\n", response.text)
+
+
+#10 Advertisement generator 
+
+import google.generativeai as genai
+genai.configure(api_key="AIzaSyDAIjcMBx5IKnHlOcZKL50YQolluqzdvwk")
+model = genai.GenerativeModel("gemini-2.5-flash")
+product = input("Enter product: ")
+audience = input("Enter target audience: ")
+price = input("Enter price: ")
+prompt = f"""
+Create a catchy advertisement.
+Product: {product}
+Target audience: {audience}
+Price: {price}
+Makeit attractive and persuasive with a call to action.
+"""
+response = model.generate_content(prompt)
+print("\nAdvertisement:\n", response.text)
+
+
+#11 Word embedding and tokenisation
+
+from gensim.models import Word2Vec
+#Sampledata
+sentences = [
+["I", "love", "NLP"],
+["NLP", "is", "fun"],
+["I", "enjoy", "learning"]
+]
+
+model = Word2Vec(sentences, vector_size=50, window=3, min_count=1)
+
+sim1 =model.wv.similarity("NLP", "learning")
+sim2 = model.wv.similarity("love", "enjoy")
+print("Similarity (NLP, learning):", sim1)
+print("Similarity (love, enjoy):", sim2)
+
+
+#12 NLP pipeline
+
+# import nltk
+# import string
+# from nltk.corpus import stopwords
+# from nltk.stem import PorterStemmer
+# from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+# nltk.download('stopwords')
+
+# text = "Natural Language Processing is very interesting and useful!"
+
+# text = text.lower()
+# text = text.translate(str.maketrans('', '', string.punctuation))
+
+# words = text.split()
+
+# stop_words = set(stopwords.words('english'))
+# words = [w for w in words if w not in stop_words]
+
+# ps = PorterStemmer()
+# words = [ps.stem(w) for w in words]
+
+# print("Processed Words:", words)
+
+# processed_text = " ".join(words)
+
+# cv = CountVectorizer()
+# bow = cv.fit_transform([processed_text])
+
+# print("\nBoW Words:", cv.get_feature_names_out())
+# print("BoW Matrix:", bow.toarray())
+
+# tfidf = TfidfVectorizer()
+# tfidf_result = tfidf.fit_transform([processed_text])
+
+# print("\nTF-IDF Words:", tfidf.get_feature_names_out())
+# print("TF-IDF Matrix:", tfidf_result.toarray())
+
+#OR
+
+import nltk, string
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+nltk.download('stopwords')
+
+text = "Natural Language Processing is very interesting and useful!".lower()
+text = text.translate(str.maketrans('', '', string.punctuation))
+
+words = [PorterStemmer().stem(w) for w in text.split() if w not in stopwords.words('english')]
+print("Processed:", words)
+
+text = " ".join(words)
+
+bow = CountVectorizer().fit_transform([text])
+print("\nBoW:", bow.toarray())
+
+tfidf = TfidfVectorizer().fit_transform([text])
+print("TF-IDF:", tfidf.toarray()) 
